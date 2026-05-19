@@ -15,10 +15,12 @@ All packages live inside `semubot_ros2_ws/src/`.
 
 ## Dependencies
 
-- ROS2 Jazzy
+- [`ROS2 Jazzy`](https://docs.ros.org/en/jazzy/index.html)
+- [`semubot_description`](https://github.com/SemuBot/semubot_description) - URDF and meshes (clone separately, see Installation)
+- [`semubot_gazebo`](https://github.com/SemuBot/semubot_gazebo) - Gazebo simulation (clone separately, see Installation)
 - `realsense2_camera`, `realsense2_description`
 - `rtabmap_launch`, `slam_toolbox`
-- `nav2_controller`, `nav2_planner`, `nav2_bt_navigator`, `nav2_behaviors`, `nav2_lifecycle_manager`
+- `nav2_controller`, `nav2_planner`, `nav2_bt_navigator`, `nav2_behaviors`, `nav2_lifecycle_manager`, `nav2_waypoint_follower`
 - `robot_localization` (EKF)
 - `depthimage_to_laserscan`
 - `ros_gz_sim`, `ros_gz_bridge` (simulation only)
@@ -34,7 +36,17 @@ https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html
 source /opt/ros/jazzy/setup.bash
 ```
 
-### 2. Build the workspace
+### 2. Clone source dependencies
+
+`semubot_description` and `semubot_gazebo` are separate repositories and must be cloned into the workspace manually:
+
+```bash
+cd semubot_ros2_ws/src
+git clone https://github.com/SemuBot/semubot_description.git
+git clone https://github.com/SemuBot/semubot_gazebo.git
+```
+
+### 3. Build the workspace
 
 ```bash
 cd semubot_ros2_ws
@@ -91,7 +103,7 @@ ros2 launch semubot_bringup robot_bringup.launch.py slam:=toolbox
 ros2 launch semubot_bringup robot_bringup.launch.py nav:=true
 ```
 
-**On the laptop** — starts RViz2 for monitoring:
+**On the laptop** - starts RViz2 for monitoring:
 
 ```bash
 ros2 launch semubot_bringup laptop_bringup.launch.py
